@@ -7,20 +7,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Sistema Unificado de Exames</h1>
     <div class="login-page">
         <div class="form">
-          <form class="register-form">
-            <input type="text" placeholder="name"/>
-            <input type="password" placeholder="password"/>
+        <!--  <form class="register-form">
+            <input type="text" placeholder="CPF"/>
+            <input type="password" placeholder="Senha"/>
             <input type="text" placeholder="email address"/>
             <button>create</button>
             <p class="message">Already registered? <a href="#">Sign In</a></p>
-          </form>
-          <form class="login-form">
-            <input type="text" placeholder="username"/>
-            <input type="password" placeholder="password"/>
-            <button>login</button>
-            <p class="message">Not registered? <a href="#">Create an account</a></p>
+          </form> -->
+          <h2>Insira seus dados</h2>
+          <form action="/login" method="post" class="login-form">
+            <input type="text" id="cpf" name="cpf" placeholder="CPF" required/>
+            <input type="password" id="senha" name="senha" placeholder="Senha"/>
+            <button type="submit">login</button>
+     <!---  <p class="message">Not registered? <a href="#">Create an account</a></p>* // --->
           </form>
         </div>
       </div>
