@@ -45,7 +45,7 @@ router.get('/', function(req, res) {
 
 router.post('/login', async (req, res) => {
     const { cpf, senha } = req.body;
-    console.log('CPF e senha recebidos:', cpf, senha);
+    console.log('CPF e senha recebidos e verificados');
     
     const isValid = await VerificaCredenciais(cpf, senha);
 
