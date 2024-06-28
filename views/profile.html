@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUE</title>
+    <link rel="stylesheet" href="perfil.css"
+<body>
+    <div class="container">
+        <h1>Profile</h1>
+        <div class="exam-info">
+          <h2>Informações sobre o Exame</h2>
+          <p><strong>Tipo de exame:</strong> <%= exam.exam_type %></p>
+          <p><strong>Nome do exame:</strong> <%= exam.exam_name %></p>
+          <p><strong>Duração estimada:</strong> <%= exam.duration %></p>
+        </div>
+        <div class="appointment-info">
+          <h2>Informações sobre o Atendimento</h2>
+          <p><strong>Horário previsto:</strong> <%= exam.appointment_time %></p>
+        </div>
+      </div>    
+</body>
+</html>

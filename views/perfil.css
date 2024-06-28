@@ -1,0 +1,49 @@
+/* Reset básico para garantir consistência entre navegadores */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Estilos para o corpo da página */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.exam-info, .appointment-info {
+  margin-bottom: 20px;
+}
+
+.exam-info h2, .appointment-info h2 {
+  font-size: 1.2em;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.exam-info p, .appointment-info p {
+  margin-bottom: 10px;
+}
+
+.exam-info p strong, .appointment-info p strong {
+  font-weight: bold;
+}
+

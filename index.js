@@ -3,12 +3,19 @@ const pool = require('./database/db');
 const app = express();
 const path = require('path');
 const router = express.Router();
-app.use(express.static('src'));
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const fs = require('fs');
 
-// Processa os dados do formulário
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(express.static('src'));
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({
+    secret: 'muitosecreto',
+    resave: false,
+    saveUninitialized: true,
+}));
 
 async function VerificaCredenciais(cpf, senha) {
     try {
@@ -23,18 +30,18 @@ async function VerificaCredenciais(cpf, senha) {
 
             if (match) {
                 console.log('Credenciais verificadas com sucesso.');
-                return true;
+                return { isValid: true, userId: user.id }; // Retorna userId ao invés de true
             } else {
                 console.log('Senha incorreta.');
-                return false;
+                return { isValid: false };
             }
         } else {
             console.log('Usuário não encontrado.');
-            return false;
+            return { isValid: false };
         }
     } catch (err) {
         console.error('Erro ao verificar as credenciais', err);
-        return false;
+        return { isValid: false };
     }
 }
 
@@ -47,12 +54,49 @@ router.post('/login', async (req, res) => {
     const { cpf, senha } = req.body;
     console.log('CPF e senha recebidos e verificados');
     
-    const isValid = await VerificaCredenciais(cpf, senha);
+    const result = await VerificaCredenciais(cpf, senha);
 
-    if (isValid) {
+    if (result.isValid) {
+        req.session.userId = result.userId; // Armazena o userId na sessão
         console.log("Login feito com sucesso");
+        res.redirect('/profile');
     } else {
         console.log("Os dados fornecidos são inválidos.");
+        res.redirect('/');
+    }
+});
+
+// Middleware de autenticação
+function checkAuth(req, res, next) {
+    if (!req.session.userId) {
+        res.redirect('/');
+    } else {
+        next();
+    }
+}
+
+// Rota de perfil
+router.get('/profile', checkAuth, async (req, res) => {
+    const client = await pool.connect();
+    try {
+        const result = await client.query('SELECT * FROM pacientes WHERE id = $1', [req.session.userId]);
+        const user = result.rows[0];
+
+        fs.readFile(path.join(__dirname, 'views', 'profile.html'), 'utf8', (err, data) => {
+            if (err) {
+                console.error('Erro ao ler o arquivo HTML', err);
+                res.status(500).send('Erro no servidor');
+                return;
+            }
+            // Substitui os placeholders pelos dados reais
+            const updatedData = data.replace('<%= exam.exam_type %>', user.tipo_exame)
+                                    .replace('<%= exam.exam_name %>', user.nome_exame)
+                                    .replace('<%= exam.duration %>', user.duraçao)
+                                    .replace('<%= exam.appointment_time %>', user.horario_exame);
+            res.send(updatedData);
+        });
+    } finally {
+        client.release();
     }
 });
 
