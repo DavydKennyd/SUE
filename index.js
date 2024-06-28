@@ -9,6 +9,8 @@ const bcrypt = require('bcrypt');
 const fs = require('fs');
 
 app.use(express.static('src'));
+app.use(express.static('views'));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(session({
