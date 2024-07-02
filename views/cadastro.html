@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro do Paciente</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro do Paciente</h1>
+        <form action="processar_cadastro.php" method="post">
+            <div class="form-group">
+                <label for="nome">Nome do Paciente:</label>
+                <input type="text" id="nome" name="nome" required>
+                <div class="form-group">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+            </div>
+            <div class="form-group">
+                <label for="telefone">Telefone:</label>
+                <input type="text" id="telefone" name="telefone" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo-exame">Tipo de Exame Entregue:</label>
+                <input type="text" id="tipo-exame" name="tipo-exame" required>
+            </div>
+            <div class="form-group">
+                <label for="data-entrada">Data de Entrada:</label>
+                <input type="date" id="data-entrada" name="data-entrada" required>
+            </div>
+            <div class="form-group">
+                <label for="duracao">Tempo Estimado para Realização do Exame (em dias):</label>
+                <input type="number" id="duracao" name="duracao" required>
+            </div>
+            <div class="form-group">
+                <label for="prioridade">Prioridade:</label>
+                <select id="prioridade" name="prioridade" required>
+                    <option value="urgencia">Urgência</option>
+                    <option value="prioridade">Prioridade</option>
+                    <option value="eletiva">Eletiva</option>
+                </select>
+            </div>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>

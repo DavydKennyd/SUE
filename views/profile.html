@@ -10,13 +10,15 @@
         <h1>Profile</h1>
         <div class="exam-info">
           <h2>Informações sobre o Exame</h2>
+          <p><strong>Nome do Paciente:</strong> <%= exam.paciente %></p>
           <p><strong>Tipo de exame:</strong> <%= exam.exam_type %></p>
-          <p><strong>Nome do exame:</strong> <%= exam.exam_name %></p>
-          <p><strong>Duração estimada:</strong> <%= exam.duration %></p>
+          <p><strong>Data de entrada:</strong> <%= exam.data_entrada %></p>
+          <p><strong>Tempo estimado para Realização:</strong> <%= exam.temp_estimado %></p>
+          <p><strong>Duração estimada:</strong> <%= exam.duration %> horas</p>
         </div>
         <div class="appointment-info">
           <h2>Informações sobre o Atendimento</h2>
-          <p><strong>Horário previsto:</strong> <%= exam.appointment_time %></p>
+          <p><strong>Prioridade do exame:</strong> <%= exam.appointment_time %></p>
         </div>
       </div>    
 </body>

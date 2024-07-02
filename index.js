@@ -91,10 +91,13 @@ router.get('/profile', checkAuth, async (req, res) => {
                 return;
             }
             // Substitui os placeholders pelos dados reais
-            const updatedData = data.replace('<%= exam.exam_type %>', user.tipo_exame)
-                                    .replace('<%= exam.exam_name %>', user.nome_exame)
-                                    .replace('<%= exam.duration %>', user.duraçao)
-                                    .replace('<%= exam.appointment_time %>', user.horario_exame);
+            const updatedData = data.replace('<%= exam.paciente %>', user.nome)
+                                    .replace('<%= exam.exam_type %>', user.tipo_exame)
+                                    .replace('<%= exam.data_entrada %>', user.data_entrada)
+                                    .replace('<%= exam.temp_estimado %>', user.tempo_estimado)
+                                    .replace('<%= exam.duration %>', user.duracao)
+                                    .replace('<%= exam.appointment_time %>', user.prioridade)
+                                    
             res.send(updatedData);
         });
     } finally {
